@@ -5,9 +5,15 @@ import { CustomerService } from './customer/customer.service';
 import { CatsModule } from './cats/cats.module';
 import { CustomerModule } from './customer/customer.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule} from '@nestjs/config';
+import config from './config/config';
 
 @Module({
-  imports: [UsersModule,CatsModule, CustomerModule],
+  imports: [UsersModule,CatsModule, CustomerModule,ConfigModule.forRoot({
+    isGlobal: true,
+    cache: true,
+    load: [config]
+  })],
   controllers: [CustomerController],
   providers: [CustomerService, Logger
     

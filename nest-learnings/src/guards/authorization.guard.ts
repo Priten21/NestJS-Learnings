@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { Roles, ROLES_KEY } from "roles.decorators"
+import { Roles, ROLES_KEY } from "src/roles/roles.decorators"
 import { Observable } from "rxjs";
 
 
@@ -15,9 +15,13 @@ export class AuthorizationGuard implements CanActivate {
         const requiredRoles = this.reflector.getAllAndOverride(ROLES_KEY, [context.getClass(),context.getHandler()])
         console.log("The required roles are: ", requiredRoles);
         
-        
+        if(!requiredRoles) return true;
+
+        const request = context.switchToHttp().getRequest();
+        const user = request.user;
 
         console.log('Inside Authorization Guard');
-        return true;
+        return (requiredRoles.includes(user.role)) ;
+
     }
 }
