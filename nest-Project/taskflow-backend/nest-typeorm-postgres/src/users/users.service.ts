@@ -56,6 +56,6 @@ export class UsersService {
     return this.userRepo.findOne({
       where: { id: userId },
       relations: ['profile', 'roles', 'posts'],
-    }); 
+    });
   }
 }

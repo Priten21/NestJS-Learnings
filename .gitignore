@@ -1,0 +1,17 @@
+# ignore node_modules everywhere
+**/node_modules/
+
+# NestJS build
+**/dist/
+**/coverage/
+
+# env files
+**/.env
+**/.env.*
+
+# logs
+**/*.log
+
+# IDE
+.vscode/
+.idea/
