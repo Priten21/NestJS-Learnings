@@ -6,7 +6,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
-import { jwtConfig  } from './auth.cofig';
+import { jwtConfig  } from './auth.config';
 
 @Injectable()
 export class AuthService {
@@ -84,6 +84,8 @@ export class AuthService {
   }
 
   async logout(userId: number) {
-    await this.redis.del(`refresh:user:${userId}`);
+  await this.redis.del(`refresh:user:${userId}`);
+  return { message: 'Logged out successfully' };
   }
+
 }
